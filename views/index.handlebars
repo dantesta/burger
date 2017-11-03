@@ -1,0 +1,56 @@
+
+
+<div class="jumbotron text-center">
+
+  <h1>Eat Da Burger</h1>
+
+  <p>Add what type of burger you want to eat next, then DEVOUR IT.</p>
+
+  <form action="/" method="POST" class="form-inline">
+    <input name="name" type="text" class="form-control input-lg" placeholder="What type of burger?"></input>
+    <input type="submit" class="btn btn-primary btn-lg"></input>
+  </form>
+
+</div>
+
+<div class="col-md-6 col-xs-12">
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading"><h2 class="panel-title">Devour your burgers!</h2></div>
+    <div class="panel-body">
+      <ul class="list-group">
+      {{#each burgers}} {{#unless this.devoured}}
+      <li class="list-group-item">
+{{this.burger_name}}
+  <form action="/{{this.id}}?_method=PUT" method="POST" class="form-inline">
+    <input type="hidden" name="id" value="{{this.id}}">
+
+    <button type="submit" class="btn btn-sm btn-danger">DEVOUR</button>
+  </form>
+
+</li>
+{{/unless}} {{/each}}
+</ul>
+    </div>
+  </div>  
+</div>
+
+
+<div class="col-md-6 col-xs-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Burger has been devoured.</h2>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        {{#each burgers}} {{#if this.devoured}}
+        <li class="list-group-item">
+          {{this.burger_name}} - Devoured At: {{this.updated_at}}
+          
+        </li>
+        {{/if}} {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
